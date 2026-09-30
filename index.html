@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internship Dashboards - Vishva S</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f2f4f7;color:#222}
+header{background:#1f3a5f;color:#fff;padding:28px 16px;text-align:center}
+header h1{margin:0 0 6px;font-size:24px}
+header p{margin:0;opacity:.85}
+main{max-width:640px;margin:24px auto;padding:0 16px}
+a.card{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-radius:10px;padding:18px;margin-bottom:14px;text-decoration:none;color:#222;box-shadow:0 1px 6px rgba(0,0,0,.1)}
+a.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.t{font-weight:bold;font-size:17px}
+.s{font-size:13px;color:#666;margin-top:4px}
+.b{font-size:12px;padding:4px 10px;border-radius:12px;background:#ddd;white-space:nowrap}
+.b.ok{background:#d4f5dc;color:#146c2e}
+.b.bad{background:#fbd5d5;color:#a11}
+footer{text-align:center;color:#666;font-size:13px;padding:16px}
+</style>
+</head>
+<body>
+<header>
+<h1>Internship Dashboards</h1>
+<p>Workplace Stress, Sleep Patterns and Climate Awareness</p>
+</header>
+<main>
+<a class="card" href="workplace-stress.html" data-check="workplace-stress.html">
+<div><div class="t">1. Workplace Stress &amp; Productivity</div><div class="s">Bar chart and pie chart</div></div>
+<span class="b">Checking...</span>
+</a>
+<a class="card" href="sleep-academic.html" data-check="sleep-academic.html">
+<div><div class="t">2. Sleep Patterns &amp; Academic Performance</div><div class="s">Bar chart and pie chart</div></div>
+<span class="b">Checking...</span>
+</a>
+<a class="card" href="climate-awareness.html" data-check="climate-awareness.html">
+<div><div class="t">3. Climate Change Awareness Among Youth</div><div class="s">Bar chart and pie chart</div></div>
+<span class="b">Checking...</span>
+</a>
+</main>
+<footer>Built with HTML, CSS, JavaScript and Chart.js</footer>
+<script>
+document.querySelectorAll('a.card').forEach(function(card){
+  var badge = card.querySelector('.b');
+  fetch(card.dataset.check, {cache:'no-store'}).then(function(r){
+    if(r.ok){badge.textContent='Active';badge.className='b ok';}
+    else{badge.textContent='Not found';badge.className='b bad';}
+  }).catch(function(){badge.textContent='Not found';badge.className='b bad';});
+});
+</script>
+</body>
+</html>
