@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Climate Change Awareness Among Youth</title>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+
+    header {
+      background-color: #2d6a4f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #cad2c5;
+    }
+
+    nav button {
+      border: none;
+      background: none;
+      padding: 15px 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    nav button.active {
+      background-color: #2d6a4f;
+      color: white;
+      font-weight: bold;
+    }
+
+    .page {
+      display: none;
+      padding: 30px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .chart-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #2d6a4f;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Climate Change Awareness Among Youth</h1>
+  </header>
+
+  <nav>
+    <button class="tab-button active" onclick="showPage('page1', event)">Bar Chart</button>
+    <button class="tab-button" onclick="showPage('page2', event)">Pie Chart</button>
+  </nav>
+
+  <!-- Page 1: Bar Chart -->
+  <div id="page1" class="page active">
+    <div class="chart-container">
+      <h2>Youth Awareness by Source of Information</h2>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Page 2: Pie Chart -->
+  <div id="page2" class="page">
+    <div class="chart-container">
+      <h2>Awareness Distribution (Pie Chart)</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Climate Awareness Survey</p>
+  </footer>
+
+  <script>
+    // Navigation Function
+    function showPage(pageId, event) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Data for charts
+    const labels = [
+      'Social Media',
+      'School Curriculum',
+      'News & Documentaries',
+      'Community Events',
+      'Family & Friends'
+    ];
+
+    const awarenessData = [40, 25, 15, 10, 10]; // Percentages
+
+    const backgroundColors = [
+      '#1b9aaa',
+      '#f4a261',
+      '#2a9d8f',
+      '#e76f51',
+      '#264653'
+    ];
+
+    // Bar Chart
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Awareness Level (%)',
+          data: awarenessData,
+          backgroundColor: backgroundColors
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: 'Percentage of Youth'
+            }
+          }
+        }
+      }
+    });
+
+    // Pie Chart
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Awareness Level',
+          data: awarenessData,
+          backgroundColor: backgroundColors
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+
+</body>
+</html>
